@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <title>Imbianchino PRO - Preventivi</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#0f4a77">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+
+  <!-- Google AdSense - SOSTITUISCI ca-pub-XXXXXXXXXX con il tuo ID -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7152938900774894" crossorigin="anonymous"></script>
+
+  <style>
+    :root{--brand-primary:#0f4a77;--brand-secondary:#1a6ba8;--brand-accent:#c67b4e;--brand-light:#e8f1f8;--brand-dark:#0a3654;--bg:#f5f7fa;--card-bg:#fff;--txt:#1e293b;--txt-muted:#64748b;--success:#059669;--danger:#dc2626;--warning:#d97706;--gold:#f59e0b;--radius:14px;--shadow-sm:0 2px 8px rgba(0,0,0,.06)}
+    *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;margin:0;background:var(--bg);color:var(--txt);padding-bottom:100px}
+    header{background:linear-gradient(135deg,var(--brand-primary),var(--brand-dark));padding:12px 16px;position:sticky;top:0;z-index:100;box-shadow:0 4px 24px rgba(15,74,119,.35);display:flex;justify-content:space-between;align-items:center}
+    .header-brand{display:flex;align-items:center;gap:10px}.header-logo{width:40px;height:40px;border-radius:10px;background:#fff;padding:2px}
+    .header-title h1{margin:0;font-size:16px;color:#fff;font-weight:700;display:flex;align-items:center;gap:6px}.header-title span{font-size:10px;color:rgba(255,255,255,.7);display:block}
+    .pro-badge{background:linear-gradient(135deg,var(--gold),#d97706);color:#fff;font-size:9px;padding:2px 6px;border-radius:4px;font-weight:800;display:none}.pro-badge.active{display:inline-block}
+    .wrap{max-width:720px;margin:0 auto;padding:16px}.card{background:var(--card-bg);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.04)}
+    .card h2{margin:0 0 14px;font-size:14px;font-weight:700;color:var(--txt-muted);display:flex;justify-content:space-between;align-items:center;text-transform:uppercase;letter-spacing:.5px}
+    .card h2::before{content:'';width:4px;height:18px;background:linear-gradient(180deg,var(--brand-primary),var(--brand-accent));border-radius:2px;margin-right:10px}
+    .ad-banner{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1px dashed #cbd5e1;border-radius:var(--radius);padding:12px;margin-bottom:14px;text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;position:relative}
+    .ad-banner::before{content:'Pubblicità';position:absolute;top:4px;left:8px;font-size:9px;color:#94a3b8;text-transform:uppercase}.ad-banner.hidden{display:none}
+    .upgrade-banner{background:linear-gradient(135deg,var(--gold),#d97706);color:#fff;padding:14px 18px;border-radius:var(--radius);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px rgba(245,158,11,.3)}
+    .upgrade-banner.hidden{display:none}.upgrade-banner-text{font-size:13px}.upgrade-banner-text strong{display:block;font-size:15px;margin-bottom:2px}
+    .upgrade-banner button{background:#fff;color:var(--gold);border:none;padding:10px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+    .limits-bar{background:#f1f5f9;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--txt-muted);display:flex;justify-content:space-between;align-items:center}.limits-bar.hidden{display:none}
+    .limits-bar .progress{background:#e2e8f0;height:6px;border-radius:3px;width:100px;overflow:hidden}.limits-bar .progress-fill{background:var(--brand-primary);height:100%;transition:width .3s}
+    .limits-bar .progress-fill.warning{background:var(--warning)}.limits-bar .progress-fill.danger{background:var(--danger)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.row{display:flex;gap:10px;align-items:center}
+    label{display:block;font-size:10px;font-weight:700;color:var(--txt-muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+    input,select,textarea{width:100%;padding:12px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:16px;background:#f8fafc;transition:all .2s;font-family:inherit}
+    input:focus,select:focus{outline:none;border-color:var(--brand-primary);background:#fff;box-shadow:0 0 0 3px rgba(15,74,119,.1)}
+    button{padding:12px 18px;border-radius:10px;border:none;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:14px;transition:all .2s;font-family:inherit}
+    .btn-primary{background:linear-gradient(135deg,var(--brand-primary),var(--brand-secondary));color:#fff;box-shadow:0 3px 12px rgba(15,74,119,.3)}
+    .btn-gold{background:linear-gradient(135deg,var(--gold),#d97706);color:#fff}.btn-danger{background:#fef2f2;color:var(--danger);border:1px solid #fecaca}
+    .btn-sec{background:var(--brand-light);color:var(--brand-primary);border:1px solid rgba(15,74,119,.2)}.btn-whatsapp{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff}
+    .btn-header{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);padding:10px 14px}.btn-new{background:#fff;color:var(--brand-primary);font-weight:700}
+    .switch-container{display:flex;align-items:center;gap:10px;padding:6px 0}.switch{position:relative;width:46px;height:26px;flex-shrink:0}.switch input{opacity:0;width:0;height:0}
+    .switch-slider{position:absolute;cursor:pointer;inset:0;background:#cbd5e1;border-radius:26px;transition:.3s}.switch-slider:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+    .switch input:checked+.switch-slider{background:var(--brand-primary)}.switch input:checked+.switch-slider:before{transform:translateX(20px)}
+    .room-card{background:#fff;border-radius:var(--radius);padding:16px;margin-bottom:12px;border-left:4px solid var(--brand-primary);box-shadow:var(--shadow-sm)}
+    .room-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed #e2e8f0}
+    .room-header input{font-weight:700;font-size:15px;border:none;background:transparent;padding:4px 0;flex:1}
+    .dim-group{display:flex;gap:8px}.dim-item{flex:1;text-align:center}.dim-item input{text-align:center;padding:10px 6px}
+    .section-divider{height:1px;background:linear-gradient(to right,transparent,#e2e8f0,transparent);margin:14px 0}
+    .treatment-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.treatment-box{background:#f8fafc;border-radius:10px;padding:12px}
+    .treatment-box.ceiling{background:linear-gradient(135deg,#fef7ed,#fef3e2);border:1px solid var(--brand-accent)}.treatment-box.ceiling.disabled{background:#f1f5f9;border:1px solid #e2e8f0;opacity:.6}
+    .treatment-label{font-size:11px;font-weight:700;color:var(--txt-muted);margin-bottom:8px}.extras-section{margin-top:12px;padding-top:12px;border-top:1px dashed #e2e8f0}
+    .extras-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.pill{background:#f1f5f9;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;border:2px solid #e2e8f0;transition:all .2s}
+    .pill.checked{background:var(--brand-light);border-color:var(--brand-primary);color:var(--brand-primary)}
+    canvas#signaturePad{border:2px dashed #cbd5e1;border-radius:12px;width:100%;height:150px;background:#fff;touch-action:none}
+    .kpi-box{background:linear-gradient(135deg,#f8fafc,#f1f5f9);padding:16px;border-radius:12px;text-align:center;border:1px solid #e2e8f0}
+    .kpi-box.highlight{background:linear-gradient(135deg,var(--brand-light),#cde4f5);border-color:var(--brand-secondary)}
+    .kpi-label{font-size:10px;font-weight:700;color:var(--txt-muted);text-transform:uppercase}.kpi-val{font-size:24px;font-weight:800;color:var(--brand-primary)}
+    .foto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:10px;margin-top:12px}
+    .foto-item{aspect-ratio:1;position:relative;border-radius:10px;overflow:hidden}.foto-item img{width:100%;height:100%;object-fit:cover}
+    .foto-item button{position:absolute;top:4px;right:4px;width:24px;height:24px;padding:0;border-radius:50%;background:rgba(220,38,38,.9);color:#fff;font-size:14px;border:none}
+    .foto-empty{grid-column:1/-1;text-align:center;padding:24px;color:var(--txt-muted);font-size:13px}
+    .action-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px}.action-row button{padding:14px 10px;font-size:13px}
+    .materials-card{background:linear-gradient(135deg,var(--brand-light),#d9ecf7);border:1px solid rgba(15,74,119,.15)}
+    .modal{position:fixed;inset:0;background:rgba(10,54,84,.7);backdrop-filter:blur(6px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+    .modal.open{display:flex}.modal-content{background:#fff;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;border-radius:20px;padding:24px;box-shadow:0 25px 60px rgba(0,0,0,.3)}
+    .status-bar{position:fixed;bottom:0;left:0;right:0;background:var(--brand-dark);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;font-size:13px;z-index:99}
+    .status-bar .total{font-size:18px;font-weight:800}.watermark{position:fixed;bottom:60px;right:10px;background:rgba(0,0,0,.6);color:#fff;padding:6px 12px;border-radius:6px;font-size:10px;z-index:98}.watermark.hidden{display:none}
+    .hidden{display:none!important}@media(max-width:400px){.action-row{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <img src="./Logo.png" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+    <div class="header-title">
+      <h1>Imbianchino PRO <span class="pro-badge" id="proBadge">PRO</span></h1>
+      <span id="versionLabel">Versione Free</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button class="btn-header" onclick="openLicenseModal()">🔑</button>
+    <button class="btn-header" onclick="openConfig()">⚙️</button>
+    <button class="btn-new" onclick="newQuote()">+ Nuovo</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="upgrade-banner" id="upgradeBanner">
+    <div class="upgrade-banner-text"><strong>⭐ Passa a PRO</strong>Preventivi illimitati, no pubblicità</div>
+    <button onclick="openLicenseModal()">€19 →</button>
+  </div>
+
+  <div class="limits-bar" id="limitsBar">
+    <span>Preventivi: <strong id="quotesUsed">0</strong>/3</span>
+    <div class="progress"><div class="progress-fill" id="quotesProgress" style="width:0%"></div></div>
+    <span style="font-size:11px;color:var(--brand-primary);cursor:pointer" onclick="openLicenseModal()">Sblocca</span>
+  </div>
+
+  <div class="ad-banner" id="adBanner1">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7152938900774894" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <div style="color:#94a3b8;font-size:12px">Spazio Pubblicitario</div>
+  </div>
+
+  <div class="card">
+    <h2>📋 Dati Cliente</h2>
+    <div class="grid2">
+      <div><label>N. Preventivo</label><input id="qNum"></div>
+      <div><label>Data</label><input type="date" id="qDate"></div>
+      <div><label>Nome</label><input id="cName" placeholder="Mario Rossi"></div>
+      <div><label>Telefono</label><input id="cPhone" type="tel" placeholder="+39 333..."></div>
+    </div>
+    <div style="margin-top:12px"><label>Indirizzo</label><input id="cAddr" placeholder="Via Roma 10, Città"></div>
+  </div>
+
+  <div class="card">
+    <h2>🏠 Stanze<button class="btn-sec" style="padding:6px 12px;font-size:12px" onclick="addRoom()">+ Aggiungi</button></h2>
+    <div id="roomsContainer"></div>
+  </div>
+
+  <div class="ad-banner" id="adBanner2">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7152938900774894" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <div style="color:#94a3b8;font-size:12px">Spazio Pubblicitario</div>
+  </div>
+
+  <div class="card materials-card">
+    <h2>🎨 Materiali</h2>
+    <div id="materialsList"></div>
+  </div>
+
+  <div class="card">
+    <h2>📸 Foto<div><label class="btn-sec" style="font-size:11px;padding:6px 10px;cursor:pointer">📷<input type="file" id="camInput" accept="image/*" capture="environment" class="hidden"></label></div></h2>
+    <div id="photoGrid" class="foto-grid"><div class="foto-empty">📷 Max <span id="maxPhotosLabel">3</span> foto</div></div>
+    <div id="photoLimitMsg" style="font-size:11px;color:var(--warning);margin-top:8px;display:none">⚠️ Limite raggiunto. <a href="#" onclick="openLicenseModal();return false" style="color:var(--brand-primary)">Passa a PRO</a></div>
+  </div>
+
+  <div class="card">
+    <h2>💰 Totali</h2>
+    <div class="grid3">
+      <div><label>Manodopera €</label><input type="number" id="laborCost" value="0" oninput="calc()"></div>
+      <div><label>Sconto €</label><input type="number" id="discount" value="0" oninput="calc()"></div>
+      <div><label>IVA</label><select id="ivaRate" onchange="calc()"><option value="0">0%</option><option value="10">10%</option><option value="22" selected>22%</option></select></div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="grid2">
+      <div class="kpi-box"><div class="kpi-label">Imponibile</div><div class="kpi-val" id="netTotal">0 €</div></div>
+      <div class="kpi-box highlight"><div class="kpi-label">Totale</div><div class="kpi-val" id="grandTotal">0 €</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✍️ Firma<button class="btn-danger" style="padding:4px 10px;font-size:11px" onclick="clearSignature()">Cancella</button></h2>
+    <canvas id="signaturePad"></canvas>
+  </div>
+
+  <div class="action-row" style="margin-bottom:80px">
+    <button class="btn-sec" onclick="openArchive()">📂 Archivio</button>
+    <button class="btn-primary" onclick="downloadPDF()">📄 PDF</button>
+    <button class="btn-whatsapp" onclick="sendWhatsapp()">📲 WhatsApp</button>
+  </div>
+</div>
+
+<div class="watermark" id="watermark">Creato con Preventivo PRO Free</div>
+
+<div class="status-bar">
+  <span>Totale IVA inclusa</span>
+  <span class="total" id="statusTotal">0,00 €</span>
+</div>
+
+<!-- MODALS -->
+<div id="licenseModal" class="modal">
+  <div class="modal-content">
+    <h2 style="margin-top:0;color:var(--brand-primary)">🔑 Attiva PRO</h2>
+    <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);padding:16px;border-radius:12px;margin-bottom:20px">
+      <strong style="color:#92400e">✨ Vantaggi PRO:</strong>
+      <ul style="margin:10px 0 0 20px;color:#78350f;font-size:14px"><li>Preventivi illimitati</li><li>Foto illimitate</li><li>PDF senza watermark</li><li>Nessuna pubblicità</li><li>Logo su PDF</li></ul>
+    </div>
+    <label style="font-size:12px;font-weight:600;color:var(--txt-muted)">Codice Licenza</label>
+    <input type="text" id="licenseInput" placeholder="XXXX-XXXX-XXXX-XXXX" style="text-transform:uppercase;letter-spacing:2px;font-family:monospace;margin-bottom:16px">
+    <button class="btn-gold" style="width:100%;margin-bottom:12px" onclick="activateLicense()">🔓 Attiva</button>
+    <div style="text-align:center;margin:20px 0;color:var(--txt-muted)">— oppure —</div>
+    <a href="https://tuonome.gumroad.com/l/preventivo-pro" target="_blank" class="btn-primary" style="width:100%;text-decoration:none;display:block;text-align:center">🛒 Acquista PRO - €19</a>
+    <p style="font-size:11px;color:var(--txt-muted);text-align:center;margin-top:16px">Riceverai il codice via email</p>
+    <button class="btn-sec" style="width:100%;margin-top:16px" onclick="el('licenseModal').classList.remove('open')">Chiudi</button>
+  </div>
+</div>
+
+<div id="configModal" class="modal">
+  <div class="modal-content">
+    <h2 style="margin-top:0;color:var(--brand-primary)">⚙️ Impostazioni</h2>
+    <h3 style="font-size:14px;color:var(--txt-muted)">Listino (€/mq)</h3>
+    <div id="priceListEditor"></div>
+    <div class="row" style="margin-top:12px"><input id="newPriceName" placeholder="Lavorazione" style="flex:2"><input id="newPriceVal" type="number" placeholder="€" style="flex:1"><button class="btn-primary" onclick="addPriceItem()" style="padding:12px">+</button></div>
+    <hr style="margin:20px 0;border:none;border-top:1px solid #e2e8f0">
+    <h3 style="font-size:14px;color:var(--txt-muted)">Termini</h3>
+    <textarea id="termsText" rows="3"></textarea>
+    <div id="proSettings" class="hidden">
+      <hr style="margin:20px 0;border:none;border-top:1px solid #e2e8f0">
+      <h3 style="font-size:14px;color:var(--gold)">⭐ PRO</h3>
+      <input id="companyName" placeholder="Nome Ditta" style="margin-bottom:8px"><input id="companyInfo" placeholder="P.IVA, Tel" style="margin-bottom:8px"><input id="companyIban" placeholder="IBAN">
+    </div>
+    <div style="margin-top:24px;display:flex;gap:10px"><button class="btn-sec" style="flex:1" onclick="el('configModal').classList.remove('open')">Annulla</button><button class="btn-primary" style="flex:1" onclick="saveConfig()">💾 Salva</button></div>
+  </div>
+</div>
+
+<div id="archiveModal" class="modal">
+  <div class="modal-content">
+    <h2 style="margin-top:0">📂 Archivio</h2>
+    <div id="archiveList"></div>
+    <button class="btn-sec" style="width:100%;margin-top:16px" onclick="el('archiveModal').classList.remove('open')">Chiudi</button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.9/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.9/vfs_fonts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+<script>
+const LICENSE_KEY='preventivo_pro_license',VALID_PREFIXES=['PRO2025','IMBIAN','VERNIX'];
+const FREE_LIMITS={maxQuotes:3,maxPhotos:3};
+
+function isProUser(){const l=localStorage.getItem(LICENSE_KEY);return l&&validateLicense(l)}
+function validateLicense(code){if(!code||code.length<16)return false;const clean=code.replace(/-/g,'').toUpperCase();if(!VALID_PREFIXES.some(p=>clean.startsWith(p)))return false;let sum=0;for(let i=0;i<clean.length;i++)sum+=clean.charCodeAt(i);return sum%7===0}
+function generateLicenseCode(){const prefix=VALID_PREFIXES[0],chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let code=prefix;while(code.length<15)code+=chars[Math.floor(Math.random()*chars.length)];let sum=0;for(let i=0;i<code.length;i++)sum+=code.charCodeAt(i);const r=sum%7;if(r!==0)code+=chars[7-r];else code+='A';return code.match(/.{1,4}/g).join('-')}
+function activateLicense(){const input=el('licenseInput').value.trim();if(validateLicense(input)){localStorage.setItem(LICENSE_KEY,input.toUpperCase());alert('✅ Licenza PRO attivata!');el('licenseModal').classList.remove('open');applyLicenseStatus()}else{alert('❌ Codice non valido')}}
+function applyLicenseStatus(){const isPro=isProUser();el('proBadge').classList.toggle('active',isPro);el('versionLabel').textContent=isPro?'Versione PRO':'Versione Free';el('upgradeBanner').classList.toggle('hidden',isPro);el('limitsBar').classList.toggle('hidden',isPro);el('adBanner1').classList.toggle('hidden',isPro);el('adBanner2').classList.toggle('hidden',isPro);el('watermark').classList.toggle('hidden',isPro);el('proSettings').classList.toggle('hidden',!isPro);el('maxPhotosLabel').textContent=isPro?'∞':FREE_LIMITS.maxPhotos;updateQuotesCounter()}
+async function getQuotesCount(){return await db.quotes.count()}
+async function updateQuotesCounter(){if(isProUser())return;const count=await getQuotesCount();el('quotesUsed').textContent=count;const pct=(count/FREE_LIMITS.maxQuotes)*100,bar=el('quotesProgress');bar.style.width=Math.min(pct,100)+'%';bar.classList.remove('warning','danger');if(pct>=100)bar.classList.add('danger');else if(pct>=66)bar.classList.add('warning')}
+async function checkLimits(action){if(isProUser())return true;if(action==='quote'){const c=await getQuotesCount();if(c>=FREE_LIMITS.maxQuotes){alert(`⚠️ Limite ${FREE_LIMITS.maxQuotes} preventivi raggiunto.\nPassa a PRO!`);openLicenseModal();return false}}if(action==='photo'&&photos.length>=FREE_LIMITS.maxPhotos){el('photoLimitMsg').style.display='block';return false}return true}
+function openLicenseModal(){el('licenseModal').classList.add('open')}
+
+const defaultPrices=[{name:"Traspirante",price:9},{name:"Lavabile",price:12},{name:"Smalto",price:14},{name:"Calce",price:15},{name:"Verniciatura",price:25},{name:"Rasatura",price:15},{name:"Antimuffa",price:5},{name:"Fissativo",price:3},{name:"Stucco",price:8}];
+let prices=JSON.parse(localStorage.getItem('myPrices'))||[...defaultPrices],terms=localStorage.getItem('myTerms')||"Pagamento: 30% all'ordine, saldo a fine lavori.",companyData=JSON.parse(localStorage.getItem('companyData'))||{};
+let rooms=[],photos=[];
+const db=new Dexie('ImbianchinoPRODB');db.version(1).stores({quotes:'++id,date,name',photos:'++id,quoteId'});
+const el=id=>document.getElementById(id),today=()=>new Date().toISOString().split('T')[0];
+el('qDate').value=today();el('qNum').value=`${new Date().getFullYear()}/${String(Math.floor(Math.random()*999)+1).padStart(3,'0')}`;
+const canvas=el('signaturePad'),signaturePad=new SignaturePad(canvas,{backgroundColor:'rgb(255,255,255)'});
+function resizeCanvas(){const r=Math.max(window.devicePixelRatio||1,1);canvas.width=canvas.offsetWidth*r;canvas.height=canvas.offsetHeight*r;canvas.getContext("2d").scale(r,r);signaturePad.clear()}
+window.addEventListener('resize',resizeCanvas);setTimeout(resizeCanvas,100);
+
+function addRoom(){rooms.push({id:Date.now(),name:`Stanza ${rooms.length+1}`,l:0,w:0,h:2.7,wallItem:prices[0].name,ceilItem:prices[0].name,extra:[],hasCeil:true});renderRooms();calc()}
+function renderRooms(){const c=el('roomsContainer');c.innerHTML='';const opts=prices.map(p=>`<option value="${p.name}">${p.name} (${p.price}€)</option>`).join(''),extraPrices=prices.filter(p=>p.price<=8);
+rooms.forEach((r,i)=>{const div=document.createElement('div');div.className='room-card';const extrasHtml=extraPrices.map(p=>`<span class="pill ${r.extra.includes(p.name)?'checked':''}" onclick="toggleExtra(${i},'${p.name}',this)">${p.name}</span>`).join('');
+div.innerHTML=`<div class="room-header"><input value="${r.name}" oninput="rooms[${i}].name=this.value"><button class="btn-danger" style="padding:6px 10px;font-size:12px" onclick="rooms.splice(${i},1);renderRooms();calc()">🗑️</button></div>
+<div class="dim-group"><div class="dim-item"><label>📏</label><input type="number" step="0.1" value="${r.l||''}" oninput="rooms[${i}].l=+this.value;calc()"></div><div class="dim-item"><label>📐</label><input type="number" step="0.1" value="${r.w||''}" oninput="rooms[${i}].w=+this.value;calc()"></div><div class="dim-item"><label>↕️</label><input type="number" step="0.1" value="${r.h||''}" oninput="rooms[${i}].h=+this.value;calc()"></div></div>
+<div class="section-divider"></div><div class="treatment-row"><div class="treatment-box"><div class="treatment-label">🖌️ Pareti</div><select onchange="rooms[${i}].wallItem=this.value;calc()">${opts.replace(`value="${r.wallItem}"`,`value="${r.wallItem}" selected`)}</select></div>
+<div class="treatment-box ceiling ${r.hasCeil?'':'disabled'}"><div class="switch-container"><label class="switch"><input type="checkbox" ${r.hasCeil?'checked':''} onchange="rooms[${i}].hasCeil=this.checked;renderRooms();calc()"><span class="switch-slider"></span></label><span style="font-size:12px">Soffitto</span></div>${r.hasCeil?`<select onchange="rooms[${i}].ceilItem=this.value;calc()">${opts.replace(`value="${r.ceilItem}"`,`value="${r.ceilItem}" selected`)}</select>`:''}</div></div>
+${extraPrices.length?`<div class="extras-section"><label>✨ Extra</label><div class="extras-wrap">${extrasHtml}</div></div>`:''}`;c.appendChild(div)});
+if(!rooms.length)c.innerHTML='<div style="text-align:center;padding:20px;color:var(--txt-muted)">Clicca + Aggiungi</div>'}
+function toggleExtra(idx,name,elem){const r=rooms[idx];if(r.extra.includes(name)){r.extra=r.extra.filter(x=>x!==name);elem.classList.remove('checked')}else{r.extra.push(name);elem.classList.add('checked')}calc()}
+
+function calc(){let totalWork=0,materials={};rooms.forEach(r=>{const wallArea=(r.l+r.w)*2*r.h,ceilArea=r.l*r.w,wp=prices.find(p=>p.name===r.wallItem)?.price||0;totalWork+=wallArea*wp;materials[r.wallItem]=(materials[r.wallItem]||0)+wallArea;if(r.hasCeil){const cp=prices.find(p=>p.name===r.ceilItem)?.price||0;totalWork+=ceilArea*cp;materials[r.ceilItem]=(materials[r.ceilItem]||0)+ceilArea}r.extra.forEach(ex=>{const ep=prices.find(p=>p.name===ex)?.price||0;totalWork+=wallArea*ep})});
+const labor=+el('laborCost').value||0,disc=+el('discount').value||0,net=totalWork+labor-disc,ivaPct=+el('ivaRate').value,final=net*(1+ivaPct/100);
+el('netTotal').innerText=formatCurrency(net);el('grandTotal').innerText=formatCurrency(final);el('statusTotal').innerText=formatCurrency(final);
+let matHtml='';for(const[name,mq]of Object.entries(materials))if(mq>0)matHtml+=`<div style="display:flex;justify-content:space-between;padding:4px 0"><span>${name}</span><strong>${mq.toFixed(1)} mq</strong></div>`;
+el('materialsList').innerHTML=matHtml||'<span style="color:var(--txt-muted)">Inserisci misure...</span>';return{totalWork,labor,disc,net,ivaPct,final,materials}}
+function formatCurrency(val){return val.toLocaleString('it-IT',{minimumFractionDigits:2})+' €'}
+
+el('camInput').onchange=async e=>{for(let f of e.target.files){if(!await checkLimits('photo'))break;try{photos.push(await imageCompression(f,{maxSizeMB:0.8,maxWidthOrHeight:1600,useWebWorker:true}))}catch(err){}}renderPhotos();e.target.value=''}
+function renderPhotos(){const grid=el('photoGrid'),max=isProUser()?999:FREE_LIMITS.maxPhotos;if(!photos.length){grid.innerHTML=`<div class="foto-empty">📷 Max ${isProUser()?'∞':max} foto</div>`;el('photoLimitMsg').style.display='none';return}
+grid.innerHTML=photos.map((p,i)=>`<div class="foto-item"><img src="${URL.createObjectURL(p)}"><button onclick="photos.splice(${i},1);renderPhotos()">×</button></div>`).join('');el('photoLimitMsg').style.display=(!isProUser()&&photos.length>=max)?'block':'none'}
+
+function openConfig(){el('configModal').classList.add('open');el('termsText').value=terms;el('companyName').value=companyData.name||'';el('companyInfo').value=companyData.info||'';el('companyIban').value=companyData.iban||'';renderPriceEditor()}
+function renderPriceEditor(){el('priceListEditor').innerHTML=prices.map((p,i)=>`<div class="row" style="margin-bottom:6px"><input value="${p.name}" style="flex:2" onchange="prices[${i}].name=this.value"><input type="number" value="${p.price}" style="width:70px" onchange="prices[${i}].price=+this.value"><button class="btn-danger" style="padding:8px" onclick="prices.splice(${i},1);renderPriceEditor()">×</button></div>`).join('')}
+function addPriceItem(){const n=el('newPriceName').value.trim(),v=el('newPriceVal').value;if(n&&v){prices.push({name:n,price:+v});renderPriceEditor();el('newPriceName').value='';el('newPriceVal').value=''}}
+function saveConfig(){terms=el('termsText').value;companyData={name:el('companyName').value,info:el('companyInfo').value,iban:el('companyIban').value};localStorage.setItem('myPrices',JSON.stringify(prices));localStorage.setItem('myTerms',terms);localStorage.setItem('companyData',JSON.stringify(companyData));el('configModal').classList.remove('open');renderRooms()}
+
+async function downloadPDF(){const d=calc(),isPro=isProUser(),signImg=signaturePad.isEmpty()?null:signaturePad.toDataURL(),pdfPhotos=[];for(let p of photos)try{pdfPhotos.push({image:await toBase64(p),width:180})}catch(e){}
+const doc={pageSize:'A4',pageMargins:[40,40,40,60],content:[{columns:[isPro&&companyData.name?{text:[{text:companyData.name+'\n',fontSize:16,bold:true,color:'#0f4a77'},{text:companyData.info||'',fontSize:9}]}:{},{text:[{text:'PREVENTIVO\n',fontSize:22,bold:true,color:'#0f4a77'},{text:`N° ${el('qNum').value} - ${el('qDate').value}`,fontSize:10}],alignment:'right'}]},{canvas:[{type:'line',x1:0,y1:10,x2:515,y2:10,lineWidth:2,lineColor:'#0f4a77'}]},'\n',{columns:[{text:[{text:'CLIENTE\n',bold:true,fontSize:10,color:'#666'},el('cName').value+'\n'+el('cPhone').value+'\n'+el('cAddr').value],width:'50%'},{text:[{text:'CANTIERE\n',bold:true,fontSize:10,color:'#666'},el('cAddr').value||'Come sopra'],alignment:'right'}]},'\n',{table:{headerRows:1,widths:['*','auto','auto','auto'],body:[[{text:'AMBIENTE',fillColor:'#0f4a77',color:'white',bold:true},{text:'MISURE',fillColor:'#0f4a77',color:'white'},{text:'LAVORAZIONE',fillColor:'#0f4a77',color:'white'},{text:'EXTRA',fillColor:'#0f4a77',color:'white'}],...rooms.map(r=>[r.name,`${r.l}x${r.w}x${r.h}`,r.wallItem+(r.hasCeil?'\nSoff: '+r.ceilItem:''),r.extra.join(', ')||'-'])]}},'\n',{columns:[{width:'50%',text:''},{width:'50%',table:{widths:['*','auto'],body:[['Lavori:',formatCurrency(d.totalWork)],['Manodopera:',formatCurrency(d.labor)],['Sconto:','-'+formatCurrency(d.disc)],['Imponibile:',{text:formatCurrency(d.net),bold:true}],[`IVA ${d.ivaPct}%:`,formatCurrency(d.net*d.ivaPct/100)],[{text:'TOTALE',bold:true,fillColor:'#e8f1f8'},{text:formatCurrency(d.final),bold:true,fontSize:14,fillColor:'#e8f1f8',color:'#0f4a77'}]],layout:'noBorders'}}]},'\n',{text:'TERMINI E CONDIZIONI',bold:true,fontSize:10},{text:terms,fontSize:9,color:'#666'},isPro&&companyData.iban?{text:'\nIBAN: '+companyData.iban,fontSize:9,bold:true}:{},'\n\n',{columns:[{text:'Firma Ditta\n\n\n_____________',fontSize:9,alignment:'center'},signImg?{image:signImg,width:120,alignment:'center'}:{text:'Firma Cliente\n\n\n_____________',fontSize:9,alignment:'center'}]},!isPro?{text:'\n\nCreato con Preventivo PRO - preventivopro.it',fontSize:8,color:'#999',alignment:'center'}:{},pdfPhotos.length?{text:'FOTO CANTIERE',pageBreak:'before',bold:true,fontSize:12}:{},pdfPhotos.length?{columns:[pdfPhotos.filter((_,i)=>i%2===0),pdfPhotos.filter((_,i)=>i%2===1)],columnGap:10}:{}]};
+pdfMake.createPdf(doc).download(`Preventivo_${el('cName').value.replace(/\s+/g,'_')||'Cliente'}.pdf`)}
+function clearSignature(){signaturePad.clear()}
+const toBase64=file=>new Promise((res,rej)=>{const r=new FileReader();r.readAsDataURL(file);r.onload=()=>res(r.result);r.onerror=rej})
+
+function sendWhatsapp(){const d=calc(),phone=el('cPhone').value.replace(/[^0-9]/g,'');if(!phone){alert('Inserisci telefono');return}const txt=`Gentile ${el('cName').value},\n\nPreventivo N° ${el('qNum').value}\n\n💰 Totale: ${formatCurrency(d.final)}\n\nA disposizione.`;window.open(`https://wa.me/${phone}?text=${encodeURIComponent(txt)}`)}
+
+async function openArchive(){el('archiveModal').classList.add('open');const all=await db.quotes.orderBy('savedAt').reverse().toArray();if(!all.length){el('archiveList').innerHTML='<div style="text-align:center;padding:20px;color:var(--txt-muted)">Nessun preventivo</div>';return}
+el('archiveList').innerHTML=all.map(q=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:#f8fafc;border-radius:10px;margin-bottom:8px"><div><strong>${q.name}</strong><br><small style="color:var(--txt-muted)">${q.number} - ${q.date}</small></div><div><button class="btn-sec" style="padding:8px 12px;font-size:12px" onclick="loadQuote(${q.id})">Apri</button><button class="btn-danger" style="padding:8px 12px;font-size:12px" onclick="deleteQuote(${q.id})">🗑️</button></div></div>`).join('')}
+async function loadQuote(id){const q=await db.quotes.get(id);if(!q)return;el('qDate').value=q.date;el('qNum').value=q.number;el('cName').value=q.name;el('cPhone').value=q.phone||'';el('cAddr').value=q.address||'';el('laborCost').value=q.labor||0;el('discount').value=q.discount||0;el('ivaRate').value=q.iva||22;rooms=JSON.parse(q.rooms||'[]');photos=[];const sp=await db.photos.where('quoteId').equals(id).toArray();for(let p of sp)if(p.blob)photos.push(p.blob);if(q.signature){const img=new Image();img.onload=()=>{signaturePad.clear();canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height)};img.src=q.signature}renderRooms();renderPhotos();calc();el('archiveModal').classList.remove('open')}
+async function deleteQuote(id){if(!confirm('Eliminare?'))return;await db.photos.where('quoteId').equals(id).delete();await db.quotes.delete(id);openArchive();updateQuotesCounter()}
+async function saveCurrentQuote(){if(!await checkLimits('quote'))return;const quote={date:el('qDate').value,number:el('qNum').value,name:el('cName').value||'Senza nome',phone:el('cPhone').value,address:el('cAddr').value,rooms:JSON.stringify(rooms),labor:el('laborCost').value,discount:el('discount').value,iva:el('ivaRate').value,signature:signaturePad.isEmpty()?null:signaturePad.toDataURL(),savedAt:new Date().toISOString()};const id=await db.quotes.add(quote);for(let p of photos)await db.photos.add({quoteId:id,blob:p});alert('✅ Salvato!');updateQuotesCounter()}
+function newQuote(){if(rooms.length&&!confirm('Nuovo preventivo?'))return;el('qDate').value=today();el('qNum').value=`${new Date().getFullYear()}/${String(Math.floor(Math.random()*999)+1).padStart(3,'0')}`;el('cName').value='';el('cPhone').value='';el('cAddr').value='';el('laborCost').value=0;el('discount').value=0;rooms=[];photos=[];signaturePad.clear();renderRooms();renderPhotos();calc();addRoom()}
+
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(e=>console.error('SW:',e));
+function initAds(){if(isProUser())return;try{(adsbygoogle=window.adsbygoogle||[]).push({});(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}}
+applyLicenseStatus();addRoom();initAds();
+if(location.search.includes('debug')){const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/eruda';s.onload=()=>eruda.init();document.body.appendChild(s)}
+if(location.search.includes('gencode'))console.log('Codice licenza:',generateLicenseCode());
+</script>
+</body>
+</html>

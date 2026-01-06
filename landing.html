@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preventivo PRO - L'App per Imbianchini e Artigiani</title>
+  <meta name="description" content="Crea preventivi professionali in 2 minuti. Foto cantiere, firma digitale, invio WhatsApp. Gratis o PRO.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Preventivo PRO - App per Artigiani">
+  <meta property="og:description" content="Crea preventivi professionali in 2 minuti dal tuo smartphone">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./icons/favicon-32.png">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    
+    :root {
+      --primary: #0f4a77;
+      --primary-dark: #0a3654;
+      --accent: #c67b4e;
+      --accent-light: #e8a878;
+      --success: #10b981;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* === HEADER === */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 16px 24px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+    }
+    
+    .logo span {
+      font-weight: 700;
+      font-size: 18px;
+    }
+    
+    .header-cta {
+      background: white;
+      color: var(--primary);
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform 0.2s;
+    }
+    
+    .header-cta:hover {
+      transform: scale(1.05);
+    }
+    
+    /* === HERO === */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 120px 24px 80px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    
+    .hero h1 .accent {
+      color: var(--accent-light);
+    }
+    
+    .hero p {
+      font-size: 18px;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 20px rgba(198,123,78,0.4);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(198,123,78,0.5);
+    }
+    
+    .btn-secondary {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    
+    /* === FEATURES === */
+    .features {
+      padding: 80px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .section-title h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+    
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .feature-card {
+      background: var(--card);
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+    
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+    
+    /* === PRICING === */
+    .pricing {
+      padding: 80px 24px;
+      background: linear-gradient(180deg, #f1f5f9 0%, var(--bg) 100%);
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .price-card {
+      background: var(--card);
+      padding: 40px 32px;
+      border-radius: 24px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .price-card.featured {
+      border: 3px solid var(--accent);
+      transform: scale(1.02);
+    }
+    
+    .price-card.featured::before {
+      content: '⭐ CONSIGLIATO';
+      position: absolute;
+      top: 20px;
+      right: -35px;
+      background: var(--accent);
+      color: white;
+      padding: 6px 40px;
+      font-size: 11px;
+      font-weight: 700;
+      transform: rotate(45deg);
+    }
+    
+    .price-card h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    
+    .price-card .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    
+    .price {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    
+    .price span {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    
+    .price-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    
+    .price-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    
+    .price-features li {
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .price-features li:last-child {
+      border-bottom: none;
+    }
+    
+    .price-features .check {
+      color: var(--success);
+      font-weight: bold;
+    }
+    
+    .price-features .cross {
+      color: #cbd5e1;
+    }
+    
+    .price-features .disabled {
+      color: #cbd5e1;
+      text-decoration: line-through;
+    }
+    
+    .price-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .price-btn.primary {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .price-btn.primary:hover {
+      background: #b56a3e;
+    }
+    
+    .price-btn.secondary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* === TESTIMONIALS === */
+    .testimonials {
+      padding: 80px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .testimonial {
+      background: var(--card);
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    
+    .testimonial-stars {
+      color: #fbbf24;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .testimonial p {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    
+    .testimonial-info strong {
+      display: block;
+      font-size: 15px;
+    }
+    
+    .testimonial-info span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    
+    /* === FAQ === */
+    .faq {
+      padding: 80px 24px;
+      background: #f1f5f9;
+    }
+    
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      background: var(--card);
+      margin-bottom: 12px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .faq-question {
+      padding: 20px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-question::after {
+      content: '+';
+      font-size: 24px;
+      color: var(--primary);
+    }
+    
+    .faq-item.open .faq-question::after {
+      content: '−';
+    }
+    
+    .faq-answer {
+      padding: 0 24px 20px;
+      color: var(--text-muted);
+      display: none;
+    }
+    
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+    
+    /* === FOOTER CTA === */
+    .footer-cta {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 80px 24px;
+      text-align: center;
+      color: white;
+    }
+    
+    .footer-cta h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .footer-cta p {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 32px;
+    }
+    
+    /* === FOOTER === */
+    footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.7);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    
+    footer a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+    }
+    
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 100px 20px 60px;
+      }
+      
+      .hero h1 {
+        font-size: 28px;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      .price-card.featured {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="#" class="logo">
+    <img src="./Logo.png" alt="Logo">
+    <span>Preventivo PRO</span>
+  </a>
+  <a href="#prezzi" class="header-cta">Inizia Gratis</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="badge">🎉 Usato da +500 artigiani in Italia</div>
+    <h1>Crea preventivi professionali <span class="accent">in 2 minuti</span></h1>
+    <p>L'app che trasforma il tuo smartphone in uno strumento di lavoro. Foto cantiere, calcoli automatici, firma digitale e invio WhatsApp.</p>
+    <div class="hero-buttons">
+      <a href="#prezzi" class="btn btn-primary">🚀 Prova Gratis</a>
+      <a href="./app.html" class="btn btn-secondary">📱 Vedi Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-title">
+    <h2>Tutto quello che ti serve</h2>
+    <p>Funzionalità pensate per chi lavora sul campo</p>
+  </div>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📸</div>
+      <h3>Foto Cantiere</h3>
+      <p>Scatta foto direttamente dall'app. Compressione automatica per non riempire la memoria.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">🧮</div>
+      <h3>Calcoli Automatici</h3>
+      <p>Inserisci le misure, l'app calcola metri quadri, materiali e costi. Zero errori.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">✍️</div>
+      <h3>Firma Digitale</h3>
+      <p>Il cliente firma sul tuo telefono. Preventivo accettato subito, niente carta.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📄</div>
+      <h3>PDF Professionale</h3>
+      <p>Genera PDF con il tuo logo, dati azienda e foto allegate. Impressiona i clienti.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📲</div>
+      <h3>Invio WhatsApp</h3>
+      <p>Un tap e il preventivo parte su WhatsApp. Il cliente lo riceve in 2 secondi.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📴</div>
+      <h3>Funziona Offline</h3>
+      <p>Niente connessione in cantiere? Nessun problema. L'app funziona anche offline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="prezzi">
+  <div class="section-title">
+    <h2>Scegli il tuo piano</h2>
+    <p>Inizia gratis, passa a PRO quando vuoi</p>
+  </div>
+  
+  <div class="pricing-grid">
+    <!-- FREE -->
+    <div class="price-card">
+      <h3>Free</h3>
+      <p class="subtitle">Per iniziare</p>
+      <div class="price">€0 <span>/ sempre</span></div>
+      <p class="price-note">Nessuna carta richiesta</p>
+      <ul class="price-features">
+        <li><span class="check">✓</span> 3 preventivi salvati</li>
+        <li><span class="check">✓</span> Calcoli automatici</li>
+        <li><span class="check">✓</span> Foto cantiere (max 3)</li>
+        <li><span class="check">✓</span> Invio WhatsApp</li>
+        <li><span class="cross">✗</span> <span class="disabled">PDF senza watermark</span></li>
+        <li><span class="cross">✗</span> <span class="disabled">Archivio illimitato</span></li>
+        <li><span class="cross">✗</span> <span class="disabled">Logo personalizzato</span></li>
+      </ul>
+      <a href="./app.html" class="price-btn secondary">Inizia Gratis</a>
+    </div>
+    
+    <!-- PRO -->
+    <div class="price-card featured">
+      <h3>PRO</h3>
+      <p class="subtitle">Per professionisti</p>
+      <div class="price">€19 <span>una tantum</span></div>
+      <p class="price-note">Paghi una volta, tuo per sempre</p>
+      <ul class="price-features">
+        <li><span class="check">✓</span> <strong>Preventivi illimitati</strong></li>
+        <li><span class="check">✓</span> Calcoli automatici</li>
+        <li><span class="check">✓</span> <strong>Foto illimitate</strong></li>
+        <li><span class="check">✓</span> Invio WhatsApp</li>
+        <li><span class="check">✓</span> <strong>PDF senza watermark</strong></li>
+        <li><span class="check">✓</span> <strong>Archivio illimitato</strong></li>
+        <li><span class="check">✓</span> <strong>Logo personalizzato</strong></li>
+      </ul>
+      <!-- GUMROAD BUTTON - Sostituisci con il tuo link -->
+      <a href="https://tuonome.gumroad.com/l/preventivo-pro" class="price-btn primary" target="_blank">
+        🔓 Sblocca PRO - €19
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-title">
+    <h2>Cosa dicono gli artigiani</h2>
+    <p>Recensioni di chi usa l'app ogni giorno</p>
+  </div>
+  
+  <div class="testimonial-grid">
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"Prima perdevo mezz'ora a fare i preventivi a mano. Ora in 2 minuti ho tutto pronto e lo mando su WhatsApp. I clienti rimangono impressionati."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">MR</div>
+        <div class="testimonial-info">
+          <strong>Marco R.</strong>
+          <span>Imbianchino, Lucca</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"Le foto cantiere sono comodissime. Scatto, si comprimono da sole, e finiscono nel PDF. Professionalità al top."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">GP</div>
+        <div class="testimonial-info">
+          <strong>Giuseppe P.</strong>
+          <span>Pittore edile, Milano</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"Finalmente un'app semplice che fa quello che serve. Niente fronzoli, solo funzioni utili. E funziona anche senza internet!"</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">LB</div>
+        <div class="testimonial-info">
+          <strong>Luigi B.</strong>
+          <span>Decoratore, Roma</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-title">
+    <h2>Domande Frequenti</h2>
+  </div>
+  
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question">Funziona su iPhone e Android?</div>
+      <div class="faq-answer">Sì! L'app funziona su qualsiasi smartphone con un browser moderno. Puoi anche installarla come app dalla home screen.</div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">Devo scaricare qualcosa?</div>
+      <div class="faq-answer">No, l'app funziona direttamente dal browser. Ma puoi aggiungerla alla home screen del telefono per averla sempre a portata di mano come un'app normale.</div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">Come funziona il pagamento PRO?</div>
+      <div class="faq-answer">Paghi una volta sola €19 tramite Gumroad (carta o PayPal). Ricevi subito il codice di attivazione via email. Nessun abbonamento, nessun rinnovo.</div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">Posso usarla su più dispositivi?</div>
+      <div class="faq-answer">La licenza PRO è personale e puoi usarla su tutti i tuoi dispositivi (telefono, tablet, PC).</div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">I dati dove vengono salvati?</div>
+      <div class="faq-answer">I preventivi rimangono sul tuo dispositivo, nella memoria del browser. Nessun dato viene inviato a server esterni. La tua privacy è garantita.</div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">Posso avere la fattura?</div>
+      <div class="faq-answer">Sì, Gumroad genera automaticamente una ricevuta. Se hai bisogno di fattura con P.IVA contattaci dopo l'acquisto.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <h2>Pronto a risparmiare tempo?</h2>
+  <p>Inizia gratis oggi. Nessuna carta richiesta.</p>
+  <a href="./app.html" class="btn btn-primary">🚀 Prova Gratis Ora</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Preventivo PRO | <a href="/cdn-cgi/l/email-protection#b6c5c3c6c6d9c4c2f6d3ced7dbc6dad398d5d9db">Supporto</a> | <a href="#">Privacy</a></p>
+  <p style="margin-top:10px; font-size:13px;">Made with ❤️ in Italia</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// FAQ Toggle
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    q.parentElement.classList.toggle('open');
+  });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+  
